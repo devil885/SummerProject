@@ -9,6 +9,7 @@ Hero::Hero(int hp, int str, int intellect, char* name)
 	this->intellect = intellect;
 	this->level = 0;
 	this->xp = 0;
+	this->maxHp = hp;
 	this->baseInt = intellect;
 	this->baseStr = str;
 	this->name = new char[strlen(name) + 1];
@@ -27,6 +28,7 @@ Hero::Hero(const Hero& other)
 	this->intellect = other.intellect;
 	this->level = other.level;
 	this->xp = other.xp;
+	this->maxHp = other.maxHp;
 	this->baseInt = other.baseInt;
 	this->baseStr = other.baseStr;
 	this->name = new char[strlen(other.name) + 1];
@@ -43,6 +45,7 @@ Hero& Hero::operator=(const Hero& other)
 		this->intellect = other.intellect;
 		this->xp = other.xp;
 		this->level = other.level;
+		this->maxHp = other.maxHp;
 		this->baseInt = other.baseInt;
 		this->baseStr = other.baseStr;
 		this->name = new char[strlen(other.name) + 1];
@@ -53,8 +56,14 @@ Hero& Hero::operator=(const Hero& other)
 
 void Hero::levelUp() 
 {
-	this->hp *= 1.1;
+	this->maxHp *= 1.1;
+	this->hp = this->maxHp;
 	this->str += this->baseStr / 3;
 	this->intellect += this->baseInt / 3;
 	this->level++;
 }
+
+int Hero::getIntellect() const { return intellect; }
+int Hero::getStr() const { return str; }
+int Hero::getHp() const { return hp; }
+void Hero::setHp(int value) { this->hp = value; }

@@ -7,7 +7,7 @@ public:
 	Monster(const Monster& other);
 	Monster& operator=(const Monster& other);
 	virtual void attack()=0;
-	virtual void defend()=0;
+	virtual void defend(double damage)=0;
 private:
 	int hp;
 	int str;
