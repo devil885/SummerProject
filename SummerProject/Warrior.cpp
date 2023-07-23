@@ -14,6 +14,10 @@ void Warrior::setBonus()
 
 void Warrior::attack(Monster &enemy) 
 {
+	if (!isInBattle())
+	{
+		enterBattle();
+	}
 	double damage = getStr() + 0.3 * getIntellect();
 	increaseRage(2);
 	enemy.defend(damage * (1 + bonusDamage));

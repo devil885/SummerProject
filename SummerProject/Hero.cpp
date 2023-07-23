@@ -15,6 +15,7 @@ Hero::Hero(int hp, int str, int intellect, const char* name)
 	this->baseStr = str;
 	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
+	this->inBattle = false;
 }
 
 Hero::~Hero() 
@@ -34,6 +35,7 @@ Hero::Hero(const Hero& other)
 	this->baseStr = other.baseStr;
 	this->name = new char[strlen(other.name) + 1];
 	strcpy(this->name, other.name);
+	this->inBattle = other.inBattle;
 }
 
 Hero& Hero::operator=(const Hero& other) 
@@ -51,7 +53,9 @@ Hero& Hero::operator=(const Hero& other)
 		this->baseStr = other.baseStr;
 		this->name = new char[strlen(other.name) + 1];
 		strcpy(this->name, other.name);
+		this->inBattle = other.inBattle;
 	}
+	
 	return *this;
 }
 
@@ -80,3 +84,6 @@ int Hero::getIntellect() const { return intellect; }
 int Hero::getStr() const { return str; }
 double Hero::getHp() const { return hp; }
 void Hero::setHp(double value) { this->hp = value; }
+bool Hero::isInBattle() { return this->inBattle; }
+void Hero::enterBattle() { this->inBattle = true; }
+void Hero::leaveBattle() { this->inBattle = false; }

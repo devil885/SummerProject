@@ -7,6 +7,10 @@ Mage::Mage(const char* name):Hero(100,4,11,name)
 
 void Mage::attack(Monster& enemy)
 {
+	if (!isInBattle())
+	{
+		enterBattle();
+	}
 	double damage = getIntellect() + (this->mana / 100) * 3;
 	enemy.defend(damage);
 	this->mana -= 10;
