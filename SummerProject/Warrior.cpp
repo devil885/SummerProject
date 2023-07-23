@@ -1,6 +1,6 @@
 #include "Warrior.h"
-
-Warrior::Warrior(char* name):Hero(100,13,2,name)
+#pragma warning(disable:4996)
+Warrior::Warrior(const char* name):Hero(100,13,2,name)
 {
 	this->rage = 0;
 	this->bonusDamage = 0;

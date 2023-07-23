@@ -19,13 +19,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Warrior.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mage.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Warrior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

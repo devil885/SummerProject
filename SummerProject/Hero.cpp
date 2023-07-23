@@ -1,8 +1,9 @@
 #include "Hero.h"
 #include <cstring>
+#include <cmath>
 #pragma warning(disable:4996)
 
-Hero::Hero(int hp, int str, int intellect, char* name)
+Hero::Hero(int hp, int str, int intellect, const char* name)
 {
 	this->hp = hp;
 	this->str = str;
@@ -63,7 +64,19 @@ void Hero::levelUp()
 	this->level++;
 }
 
+void Hero::increaseXp(int amount) 
+{
+	if (this->xp+amount>pow(2,level))
+	{
+		this->xp = this->xp + amount - pow(2, level);
+		levelUp();
+		return;
+	}
+	this->xp += amount;
+
+}
+
 int Hero::getIntellect() const { return intellect; }
 int Hero::getStr() const { return str; }
-int Hero::getHp() const { return hp; }
-void Hero::setHp(int value) { this->hp = value; }
+double Hero::getHp() const { return hp; }
+void Hero::setHp(double value) { this->hp = value; }

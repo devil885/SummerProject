@@ -1,24 +1,25 @@
 #pragma once
 #include "Monster.h"
-
+class Monster;
 class Hero
 {
 public:
-	Hero(int hp, int str, int intellect, char* name);
+	Hero(int hp, int str, int intellect,const char* name);
 	virtual ~Hero();
 	Hero(const Hero& other);
 	Hero& operator=(const Hero& other);
 	void levelUp();
+	void increaseXp(int amount);
 	virtual void attack(Monster& enemy) = 0;
 	virtual void defend(double damage) = 0;
 
 protected:
 	int getIntellect() const;
 	int getStr() const;
-	int getHp() const;
-	void setHp(int value);
+	double getHp() const;
+	void setHp(double value);
 private:
-	int hp;
+	double hp;
 	int str;
 	int intellect;
 	int level;

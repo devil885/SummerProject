@@ -1,8 +1,8 @@
 #include "Monster.h"
 #include <cstring>
+#pragma warning(disable:4996)
 
-
-Monster::Monster(int hp, int str, int intellect, char* name)
+Monster::Monster(int hp, int str, int intellect, const char* name)
 {
 	this->hp=hp;
 	this->str = str;

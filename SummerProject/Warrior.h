@@ -4,7 +4,7 @@
 class Warrior:public Hero 
 {
 public:
-	Warrior(char* name);
+	Warrior(const char* name);
 	void setBonus();
 	void attack(Monster& enemy) override;
 	void defend(double damage) override;
