@@ -28,5 +28,5 @@ void Paladin::attack(Monster& enemy)
 
 void Paladin::defend(double damage) 
 {
-
+	setHp(getHp() - damage);
 }

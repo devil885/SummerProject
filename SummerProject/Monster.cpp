@@ -40,3 +40,6 @@ Monster& Monster::operator=(const Monster& other)
 	}
 	return *this;
 }
+
+double Monster::getHp() { return this->hp; }
+void Monster::setHp(double amount) { this->hp = amount; }

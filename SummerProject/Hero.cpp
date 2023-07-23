@@ -84,6 +84,6 @@ int Hero::getIntellect() const { return intellect; }
 int Hero::getStr() const { return str; }
 double Hero::getHp() const { return hp; }
 void Hero::setHp(double value) { this->hp = value; }
-bool Hero::isInBattle() { return this->inBattle; }
+bool Hero::isInBattle() const  { return this->inBattle; }
 void Hero::enterBattle() { this->inBattle = true; }
 void Hero::leaveBattle() { this->inBattle = false; }

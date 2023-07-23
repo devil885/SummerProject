@@ -14,13 +14,12 @@ public:
 	virtual void defend(double damage) = 0;
 	void enterBattle();
 	void leaveBattle();
-
-protected:
 	int getIntellect() const;
-	int getStr() const;
 	double getHp() const;
+	int getStr() const;
+protected:
 	void setHp(double value);
-	bool isInBattle();
+	bool isInBattle() const;
 	
 private:
 	double hp;
