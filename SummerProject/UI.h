@@ -35,8 +35,8 @@ private:
 	Hero* getHero();
 	void printMap();
 	void printTile(int num);
-	void step();
-	void readInput();
+	void step(char input);
+	char readInput();
 	void move(int x, int y);
 	Monster* findMonster(int x, int y);
 	void battle(Monster* enemy,int x,int y);

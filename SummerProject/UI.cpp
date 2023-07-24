@@ -182,10 +182,8 @@ void UI::move(int x, int y)
 	}
 }
 
-void UI::readInput() 
+void UI::step(char input)
 {
-	char input;
-	cin >> input;
 	switch (input)
 	{
 	case 'w':
@@ -207,24 +205,24 @@ void UI::readInput()
 		break;
 	}
 }
-/*
-void UI::step() 
+
+char UI::readInput() 
 {
 	char input;
 	cin >> input;
-
+	return input;
 }
-*/
+
 void UI::gameStart() 
 {
 	//getHero();
 	//generateMap();
 	while (this->runGame)
 	{
-		system("cls");
 		printMap();
-		readInput();
-
+		char input = readInput();
+		system("cls");
+		step(input);
 	}
 }
 
