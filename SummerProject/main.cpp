@@ -1,12 +1,11 @@
 #include <iostream>
-#include <cstring>
-#include "Hero.h"
-#include "Monster.h"
-
+#include <conio.h>
+#include "UI.h"
 using namespace std;
 
 int main() 
 {
-
+	UI* game= UI::getInstance();
+	game->gameStart();
 	return 0;
 }

@@ -4,7 +4,7 @@
 class Goblin:public Monster
 {
 public:
-	Goblin(const char* name);
+	Goblin(const char* name, int x, int y);
 	void attack(Hero& hero)override;
 	void defend(double damage)override;
 private:

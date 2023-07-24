@@ -27,7 +27,7 @@ private:
 	int intellect;
 	int level;
 	int xp;
-	int maxHp;
+	double maxHp;
 	int baseStr;
 	int baseInt;
 	char* name;

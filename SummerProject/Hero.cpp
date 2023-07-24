@@ -1,6 +1,7 @@
 #include "Hero.h"
 #include <cstring>
 #include <cmath>
+#include <iostream>
 #pragma warning(disable:4996)
 
 Hero::Hero(int hp, int str, int intellect, const char* name)
@@ -66,6 +67,7 @@ void Hero::levelUp()
 	this->str += this->baseStr / 3;
 	this->intellect += this->baseInt / 3;
 	this->level++;
+	std::cout << "You leveled up Pog!";
 }
 
 void Hero::increaseXp(int amount) 

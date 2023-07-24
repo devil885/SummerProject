@@ -1,4 +1,5 @@
 #pragma once
+#include <stdexcept>
 template <typename T>
 class BasedVector
 {
@@ -83,6 +84,7 @@ private:
 		}
 		delete[] arr;
 		arr = betterArr;
+		this->capacity *= 2;
 	}
 
 	void clear() { delete[] arr; }

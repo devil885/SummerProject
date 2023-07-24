@@ -1,6 +1,6 @@
 #include "Goblin.h"
 
-Goblin::Goblin(const char* name) :Monster(10, 4, 5, name) 
+Goblin::Goblin(const char* name,int x,int y) :Monster(100, 4, 5, name,x,y) 
 {
 }
 
