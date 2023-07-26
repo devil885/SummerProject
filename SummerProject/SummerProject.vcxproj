@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dragonkin.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Mage.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasedVector.h" />
+    <ClInclude Include="Dragonkin.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Mage.h" />
