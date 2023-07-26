@@ -13,7 +13,15 @@ Hero* UI::getHero()
 	cout<<" Paladin (p)"<<endl;
 	char hero;
 	char* name=new char[1025];
-	cin >> hero;
+	//cin >> hero;
+	do
+	{
+		cin >> hero;
+		if (hero != 'w' && hero != 'm' && hero != 'p')
+		{
+			cout << "Incorrect command!"<<endl;
+		}
+	} while (hero!='w' && hero!='m' && hero!='p');
 	cout << "Enter name:"<<endl;
 	cin >> name;
 
@@ -112,6 +120,9 @@ void UI::printTile(int num)
 {
 	switch (num)
 	{
+	case 0:
+		cout << (char)176;//field
+		break;
 	case -1:
 		cout << 'x';//wall
 		break;
@@ -131,7 +142,7 @@ void UI::printTile(int num)
 		cout << 'U';//player
 		break;
 	default:
-		cout << (char)176;//field
+		cout << '?';
 		break;
 	}
 }

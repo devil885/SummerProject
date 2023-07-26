@@ -34,5 +34,12 @@ void Paladin::defend(double damage)
 
 void Paladin::printSpecial() 
 {
-	cout << " Smite cd: " << this->smiteCooldown<<endl;
+	if (this->smiteCooldown)
+	{
+		cout << " Smite cd: " << this->smiteCooldown << endl;
+	}
+	else
+	{
+		cout << " Smite Ready!" << endl;
+	}
 }
