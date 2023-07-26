@@ -9,11 +9,12 @@ public:
 	virtual ~Monster();
 	Monster(const Monster& other);
 	Monster& operator=(const Monster& other);
-	virtual void attack(Hero& hero)=0;
+	virtual double attack(Hero& hero)=0;
 	virtual void defend(double damage)=0;
 	double getHp() const;
 	int getX() const;
 	int getY() const;
+	char* getName() const;
 protected:
 	void setHp(double amount);
 private:

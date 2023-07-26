@@ -51,3 +51,4 @@ double Monster::getHp() const{ return this->hp; }
 void Monster::setHp(double amount) { this->hp = amount; }
 int Monster::getX() const { return this->x; }
 int Monster::getY() const { return this->y; }
+char* Monster::getName()const { return this->name; }

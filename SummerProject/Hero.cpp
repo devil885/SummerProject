@@ -4,6 +4,7 @@
 #include <iostream>
 #pragma warning(disable:4996)
 
+using namespace std;
 Hero::Hero(int hp, int str, int intellect, const char* name)
 {
 	this->hp = hp;
@@ -67,12 +68,12 @@ void Hero::levelUp()
 	this->str += this->baseStr / 3;
 	this->intellect += this->baseInt / 3;
 	this->level++;
-	std::cout << "You leveled up Pog!";
+	cout << "You leveled up Pog!" <<endl;
 }
 
 void Hero::increaseXp(int amount) 
 {
-	if (this->xp+amount>pow(2,level))
+	if (this->xp+amount>=pow(2,level))
 	{
 		this->xp = this->xp + amount - pow(2, level);
 		levelUp();
@@ -85,6 +86,7 @@ void Hero::increaseXp(int amount)
 int Hero::getIntellect() const { return intellect; }
 int Hero::getStr() const { return str; }
 double Hero::getHp() const { return hp; }
+char* Hero::getName() const { return name; }
 void Hero::setHp(double value) { this->hp = value; }
 bool Hero::isInBattle() const  { return this->inBattle; }
 void Hero::enterBattle() { this->inBattle = true; }

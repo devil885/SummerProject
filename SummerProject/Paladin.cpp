@@ -5,7 +5,7 @@ Paladin::Paladin(const char* name):Hero(100,9,6,name)
 	this->smiteCooldown = 2;
 }
 
-void Paladin::attack(Monster& enemy) 
+double Paladin::attack(Monster& enemy)
 {
 	if (!isInBattle())
 	{
@@ -18,15 +18,21 @@ void Paladin::attack(Monster& enemy)
 		damage = 1.5*(0.5 * getStr() + 0.5 * getIntellect());
 		enemy.defend(damage);
 		this->smiteCooldown = 2;
-		return;
+		return damage;
 	}
 
 	damage = 0.5 * getStr() + 0.5 * getIntellect();
 	enemy.defend(damage);
 	this->smiteCooldown--;
+	return damage;
 }
 
 void Paladin::defend(double damage) 
 {
 	setHp(getHp() - damage);
+}
+
+void Paladin::printSpecial() 
+{
+	cout << " Smite cd: " << this->smiteCooldown<<endl;
 }

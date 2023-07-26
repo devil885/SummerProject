@@ -7,22 +7,38 @@ using namespace std;
 
 Hero* UI::getHero() 
 {
-	cout << "Pick a class: Warrior (w)"<<endl;
+	cout << "Pick a class:" << endl;
+	cout<<" Warrior (w)"<<endl;
+	cout<<" Mage (m)"<<endl;
+	cout<<" Paladin (p)"<<endl;
 	char hero;
 	char* name=new char[1025];
 	cin >> hero;
 	cout << "Enter name:"<<endl;
 	cin >> name;
 
+	Hero* pc = nullptr;
 	switch (hero)
 	{
 	case 'w':
-	{Hero* pc = new Warrior(name);
-	delete[] name;
-	return pc; }
+	pc = new Warrior(name);
+	playerClass = "Warrior";
+	break;
+	//return pc; 
+	case 'm':
+		pc = new Mage(name);
+		playerClass = "Mage";
+		break;
+	case 'p':
+		pc = new Paladin(name);
+		playerClass = "Paladin";
+		break;
 	default:
-		return nullptr;
+		cout << "Invalid command";
+		break;
 	}
+	delete[] name;
+	return pc;
 }
 
 void UI::generateMap() 
@@ -32,32 +48,25 @@ void UI::generateMap()
 		this->map[i][8] = -1;
 		this->map[i][12] = -1;
 	}
+
 	this->map[0][10]=69;
 	this->playerX = 0;
 	this->playerY = 10;
-	this->map[4][10] = 1;
+	for (int i = 2; i < 21; i+=2)
+	{
+		this->map[i][10] = 1;
+	}
+
 	this->mapSize = 21;
 }
 
-/*
-UI* UI::getInstance() 
-{
-	if (UI::instancePtr == nullptr)
-	{
-		UI::instancePtr = new UI();
-	}
-	return UI::instancePtr;
-}
-*/
-
-
-
 UI::UI() : map()
 {
-	this->player = getHero();
 	this->monsterCount = 0;
 	generateMap();
 	this->runGame = true;
+	this->playerClass = "";
+	this->player = getHero();
 }
 
 UI::~UI() 
@@ -139,20 +148,32 @@ void UI::printMap()
 	}
 }
 
-void UI::battle(Monster* enemy, int x, int y)
+void UI::battle(Monster* enemy,char* enemyName, int x, int y)
 {
-	player->attack(*enemy);
+	double damage;
+	double enemyDmg ;
+	damage = player->attack(*enemy);
+	cout << "You dealt " << damage << " damage to the " << enemyName << endl;
 	if (enemy->getHp() > 0)
 	{
-		enemy->attack(*player);
+		enemyDmg = enemy->attack(*player);
+		cout << "The " << enemyName << " hit you for " << enemyDmg << " damage!" << endl;
+		if (player->getHp() <= 0)
+		{
+			cout << "You died!" << endl;
+			cout << "Game over!";
+			this->runGame = false;
+		}
 	}
 	else
 	{
-		player->increaseXp(1);
-		map[x][y] = (char)176;
+		map[x][y] = 0;
 		swap(map[x][y], map[playerX][playerY]);
 		playerX = x;
 		playerY = y;
+		player->leaveBattle();
+		cout << "You killed the " << enemyName << "!!" << endl;
+		player->increaseXp(1);
 	}
 }
 
@@ -168,16 +189,20 @@ void UI::move(int x, int y)
 		cout << "You attack the goblin" << endl;
 		enemy = generateMonster(x, y);
 		map[x][y] = 100;//the goblin is now counted as a generated goblin
-		battle(enemy, x, y);
+		battle(enemy,enemy->getName(), x, y);
 		break;
 	case 100:
 		cout << "You attack the goblin" << endl;
-		battle(findMonster(x, y),x,y);
+		enemy = findMonster(x, y);
+		battle(enemy, enemy->getName(), x,y);
 		break;
-	default:
+	case 0:
 		swap(map[x][y], map[playerX][playerY]);
 		playerX = x;
 		playerY = y;
+		break;
+	default:
+		cout << "You can't exit the map!!" << endl;
 		break;
 	}
 }
@@ -201,7 +226,9 @@ void UI::step(char input)
 	case 'q':
 		this->runGame = false;
 		cout << "Quitting game!"<<endl<<"Thank you for playing <3";
+		break;
 	default:
+		cout << "Invalid command!" << endl;
 		break;
 	}
 }
@@ -213,13 +240,20 @@ char UI::readInput()
 	return input;
 }
 
+void UI::printPlayerStats() 
+{
+	cout << "Name: " << player->getName() << " Class: " << playerClass;
+	player->printSpecial();
+	cout << "HP: " << player->getHp() << " Str: " << player->getStr() << " Int: " << player->getIntellect()<<endl;
+	//cout << "X: " << playerX << " Y: " << playerY << endl;
+}
+
 void UI::gameStart() 
 {
-	//getHero();
-	//generateMap();
 	while (this->runGame)
 	{
 		printMap();
+		printPlayerStats();
 		char input = readInput();
 		system("cls");
 		step(input);

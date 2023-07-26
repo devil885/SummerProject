@@ -10,13 +10,15 @@ public:
 	Hero& operator=(const Hero& other);
 	void levelUp();
 	void increaseXp(int amount);
-	virtual void attack(Monster& enemy) = 0;
+	virtual double attack(Monster& enemy) = 0;
 	virtual void defend(double damage) = 0;
+	virtual void printSpecial() = 0;
 	void enterBattle();
 	void leaveBattle();
 	int getIntellect() const;
 	double getHp() const;
 	int getStr() const;
+	char* getName() const;
 protected:
 	void setHp(double value);
 	bool isInBattle() const;

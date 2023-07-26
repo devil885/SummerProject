@@ -1,5 +1,7 @@
 #pragma once
 #include"Warrior.h"
+#include "Mage.h"
+#include "Paladin.h"
 #include "Goblin.h"
 #include "BasedVector.h"
 #include <stdlib.h>
@@ -25,6 +27,7 @@ private:
 	BasedVector<Monster*> monsters;
 	Hero* player;
 	static UI* instancePtr;
+	const char* playerClass;
 	int monsterCount;
 	int mapSize;
 	int playerX;
@@ -39,5 +42,6 @@ private:
 	char readInput();
 	void move(int x, int y);
 	Monster* findMonster(int x, int y);
-	void battle(Monster* enemy,int x,int y);
+	void battle(Monster* enemy, char* enemyName,int x,int y);
+	void printPlayerStats();
 };
