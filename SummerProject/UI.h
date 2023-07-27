@@ -3,8 +3,10 @@
 #include "Mage.h"
 #include "Paladin.h"
 #include "Goblin.h"
+#include "Dragonkin.h"
 #include "BasedVector.h"
 #include <stdlib.h>
+
 class UI
 {
 public:
@@ -29,6 +31,7 @@ private:
 	static UI* instancePtr;
 	const char* playerClass;
 	int monsterCount;
+	int livingMonsters;
 	int mapSize;
 	int playerX;
 	int playerY;

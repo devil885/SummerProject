@@ -14,7 +14,14 @@ double Mage::attack(Monster& enemy)
 	}
 	double damage = getIntellect() + (this->mana / 100) * 3;
 	enemy.defend(damage);
-	this->mana -= 10;
+	if (this->mana<10)
+	{
+		this->mana = 0;
+	}
+	else 
+	{
+		this->mana -= 10;
+	}
 	return damage;
 }
 

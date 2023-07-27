@@ -53,7 +53,7 @@ void UI::generateMap()
 {
 	for (int i = 0; i < 21; i++)
 	{
-		this->map[i][8] = -1;
+		this->map[i][8] = -1;//walls
 		this->map[i][12] = -1;
 	}
 
@@ -62,7 +62,8 @@ void UI::generateMap()
 	this->playerY = 10;
 	for (int i = 2; i < 21; i+=2)
 	{
-		this->map[i][10] = 1;
+		this->map[i][10] = 1;//goblins
+		this->map[i][11] = 2;//dragonkin
 	}
 
 	this->mapSize = 21;
@@ -71,6 +72,7 @@ void UI::generateMap()
 UI::UI() : map()
 {
 	this->monsterCount = 0;
+	this->livingMonsters = 0;
 	generateMap();
 	this->runGame = true;
 	this->playerClass = "";
@@ -92,10 +94,17 @@ Monster* UI::generateMonster(int x,int y)
 	switch (map[x][y])
 	{
 	case 1:
-	{ enemy = new Goblin("Goblin",x,y);
-	this->monsters.push(enemy);
-	this->monsterCount++;
-	break; }
+		enemy = new Goblin("Goblin",x,y);
+		this->monsters.push(enemy);
+		this->monsterCount++;
+		this->livingMonsters++;
+		break; 
+	case 2:
+		enemy = new Dragonkin("Dragonkin", x, y);
+		this->monsters.push(enemy);
+		this->monsterCount++;
+		this->livingMonsters++;
+		break;
 	default:
 		break;
 	}
@@ -127,13 +136,16 @@ void UI::printTile(int num)
 		cout << 'x';//wall
 		break;
 	case 1://not previously generated goblin
-		cout << 'G';//goblin
+		cout << 'G';
 		break;
 	case 100://already generated goblin
-		cout << 'G';//goblin
+		cout << 'G';
 		break;
-	case 2:
-		cout <<(char)235;//dragonkin
+	case 2://not previously generated dragonkin
+		cout <<'D';//dragonkin
+		break;
+	case 200://already generated dragonkin
+		cout<< 'D';
 		break;
 	case 3:
 		cout << (char)146;//deathkinght
@@ -142,7 +154,7 @@ void UI::printTile(int num)
 		cout << 'U';//player
 		break;
 	default:
-		cout << '?';
+		cout << '?';//unexpected value
 		break;
 	}
 }
@@ -182,7 +194,11 @@ void UI::battle(Monster* enemy,char* enemyName, int x, int y)
 		swap(map[x][y], map[playerX][playerY]);
 		playerX = x;
 		playerY = y;
-		player->leaveBattle();
+		livingMonsters--;
+		if (livingMonsters==0)
+		{
+			player->leaveBattle();
+		}
 		cout << "You killed the " << enemyName << "!!" << endl;
 		player->increaseXp(1);
 	}
@@ -206,6 +222,17 @@ void UI::move(int x, int y)
 		cout << "You attack the goblin" << endl;
 		enemy = findMonster(x, y);
 		battle(enemy, enemy->getName(), x,y);
+		break;
+	case 2:
+		cout << "You attack the dragonkin" << endl;
+		enemy = generateMonster(x, y);
+		map[x][y] = 200;//the dragonkin is now counted as a generated dragonkin
+		battle(enemy, enemy->getName(), x, y);
+		break;
+	case 200:
+		cout << "You attack the dragonkin" << endl;
+		enemy = findMonster(x, y);
+		battle(enemy, enemy->getName(), x, y);
 		break;
 	case 0:
 		swap(map[x][y], map[playerX][playerY]);
