@@ -9,8 +9,10 @@ public:
 	virtual ~Monster();
 	Monster(const Monster& other);
 	Monster& operator=(const Monster& other);
+
 	virtual double attack(Hero& hero)=0;
 	virtual void defend(double damage)=0;
+
 	double getHp() const;
 	int getX() const;
 	int getY() const;

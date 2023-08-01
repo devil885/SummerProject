@@ -53,17 +53,19 @@ void UI::generateMap()
 {
 	for (int i = 0; i < 21; i++)
 	{
-		this->map[i][8] = -1;//walls
-		this->map[i][12] = -1;
+		this->map[i][5] = -1;//walls
+		this->map[i][15] = -1;
 	}
 
-	this->map[0][10]=69;
-	this->playerX = 0;
+	this->map[0][10]=69;//player
+	this->playerX = 0;//field
 	this->playerY = 10;
 	for (int i = 2; i < 21; i+=2)
 	{
+		this->map[i][8] = 3;//deathkinghts
 		this->map[i][10] = 1;//goblins
-		this->map[i][11] = 2;//dragonkin
+		this->map[i][12] = 2;//dragonkin
+
 	}
 
 	this->mapSize = 21;
@@ -105,7 +107,15 @@ Monster* UI::generateMonster(int x,int y)
 		this->monsterCount++;
 		this->livingMonsters++;
 		break;
+	case 3:
+		enemy = new DeathKnight("DeathKnight", x, y);
+		this->monsters.push(enemy);
+		this->monsterCount++;
+		this->livingMonsters++;
+		break;
 	default:
+		cout << "Vouldnt generate enemy !!!" << endl;
+		//runGame = false;
 		break;
 	}
 	return enemy;
@@ -148,7 +158,10 @@ void UI::printTile(int num)
 		cout<< 'D';
 		break;
 	case 3:
-		cout << (char)146;//deathkinght
+		cout << (char)146;//not previously generated deathkinght
+		break;
+	case 300:
+		cout << (char)146;//already generated deathkinght
 		break;
 	case 69:
 		cout << 'U';//player
@@ -231,6 +244,17 @@ void UI::move(int x, int y)
 		break;
 	case 200:
 		cout << "You attack the dragonkin" << endl;
+		enemy = findMonster(x, y);
+		battle(enemy, enemy->getName(), x, y);
+		break;
+	case 3:
+		cout << "You attack the deathknight" << endl;
+		enemy = generateMonster(x, y);
+		map[x][y] = 200;//the deathknight is now counted as a generated deathknight
+		battle(enemy, enemy->getName(), x, y);
+		break;
+	case 300:
+		cout << "You attack the deathknight" << endl;
 		enemy = findMonster(x, y);
 		battle(enemy, enemy->getName(), x, y);
 		break;

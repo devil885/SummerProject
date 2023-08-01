@@ -1,6 +1,6 @@
 #pragma once
 #include "Monster.h"
-class Dragonkin :public Monster
+class Dragonkin : virtual public Monster
 {
 public:
 	Dragonkin(const char* name,int x,int y);

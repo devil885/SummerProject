@@ -2,8 +2,11 @@
 #include"Warrior.h"
 #include "Mage.h"
 #include "Paladin.h"
+
 #include "Goblin.h"
 #include "Dragonkin.h"
+#include"DeathKnight.h"
+
 #include "BasedVector.h"
 #include <stdlib.h>
 
@@ -35,7 +38,8 @@ private:
 	int mapSize;
 	int playerX;
 	int playerY;
-	bool runGame;
+	bool runGame; 
+
 	UI();
 	void generateMap();
 	Hero* getHero();

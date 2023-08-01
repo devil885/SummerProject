@@ -33,18 +33,17 @@ void Mage::defend(double damage)
 void Mage::printSpecial() 
 {
 	cout << " Mana: ";
-	if (isInBattle())
-	{
-		cout<<this->mana << endl;
-	}
-	else
-	{
-		cout << 100<<endl;
-	}
+	cout << this->mana << endl;
 	
 }
 
 void Mage::refreshMana()
 {
 	this->mana = 100; 
+}
+
+void Mage::leaveBattle() 
+{
+	refreshMana();
+	Hero::leaveBattle();
 }

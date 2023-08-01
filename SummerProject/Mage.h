@@ -12,6 +12,7 @@ public:
 	void defend(double damage) override;
 	void printSpecial() override;
 	void refreshMana();
+	void leaveBattle() override;
 private:
 	double mana;
 };
