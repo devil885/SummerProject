@@ -19,6 +19,7 @@ public:
 	double getHp() const;
 	int getStr() const;
 	char* getName() const;
+	int getLevel() const;
 	void increaseXp(int amount);
 protected:
 	void setHp(double value);

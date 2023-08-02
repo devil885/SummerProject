@@ -83,11 +83,13 @@ void Hero::increaseXp(int amount)
 
 }
 
-int Hero::getIntellect() const { return intellect; }
-int Hero::getStr() const { return str; }
-double Hero::getHp() const { return hp; }
-char* Hero::getName() const { return name; }
+int Hero::getIntellect() const { return this->intellect; }
+int Hero::getStr() const { return this->str; }
+double Hero::getHp() const { return this->hp; }
+char* Hero::getName() const { return this->name; }
+int Hero::getLevel() const { return this->level; }
+bool Hero::isInBattle() const { return this->inBattle; }
+
 void Hero::setHp(double value) { this->hp = value; }
-bool Hero::isInBattle() const  { return this->inBattle; }
 void Hero::enterBattle() { this->inBattle = true; }
 void Hero::leaveBattle() { this->inBattle = false; }

@@ -14,6 +14,7 @@ public:
 	virtual void defend(double damage)=0;
 
 	double getHp() const;
+	int getStr() const;
 	int getX() const;
 	int getY() const;
 	char* getName() const;

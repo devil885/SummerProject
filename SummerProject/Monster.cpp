@@ -47,8 +47,9 @@ Monster& Monster::operator=(const Monster& other)
 	return *this;
 }
 
-double Monster::getHp() const{ return this->hp; }
 void Monster::setHp(double amount) { this->hp = amount; }
+double Monster::getHp() const{ return this->hp; }
+int Monster::getStr() const{ return this->str; }
 int Monster::getX() const { return this->x; }
 int Monster::getY() const { return this->y; }
 char* Monster::getName()const { return this->name; }

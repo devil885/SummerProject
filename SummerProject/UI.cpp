@@ -13,7 +13,6 @@ Hero* UI::getHero()
 	cout<<" Paladin (p)"<<endl;
 	char hero;
 	char* name=new char[1025];
-	//cin >> hero;
 	do
 	{
 		cin >> hero;
@@ -32,7 +31,6 @@ Hero* UI::getHero()
 	pc = new Warrior(name);
 	playerClass = "Warrior";
 	break;
-	//return pc; 
 	case 'm':
 		pc = new Mage(name);
 		playerClass = "Mage";
@@ -58,7 +56,7 @@ void UI::generateMap()
 	}
 
 	this->map[0][10]=69;//player
-	this->playerX = 0;//field
+	this->playerX = 0;
 	this->playerY = 10;
 	for (int i = 2; i < 21; i+=2)
 	{
@@ -71,7 +69,7 @@ void UI::generateMap()
 	this->mapSize = 21;
 }
 
-UI::UI() : map()
+UI::UI() : map()//intializes map filled with 0 which is our field symbol
 {
 	this->monsterCount = 0;
 	this->livingMonsters = 0;
@@ -114,8 +112,8 @@ Monster* UI::generateMonster(int x,int y)
 		this->livingMonsters++;
 		break;
 	default:
-		cout << "Vouldnt generate enemy !!!" << endl;
-		//runGame = false;
+		cout << "Couldn't generate enemy !!!" << endl;
+		runGame = false;
 		break;
 	}
 	return enemy;
@@ -176,7 +174,7 @@ void UI::printMap()
 {
 	for (int i = 20; i >=0; i--)
 	{
-		for (int j = 0; j <20; j++)
+		for (int j = 0; j <21; j++)
 		{
 			printTile(this->map[i][j]);
 		}
@@ -190,6 +188,7 @@ void UI::battle(Monster* enemy,char* enemyName, int x, int y)
 	double enemyDmg ;
 	damage = player->attack(*enemy);
 	cout << "You dealt " << damage << " damage to the " << enemyName << endl;
+
 	if (enemy->getHp() > 0)
 	{
 		enemyDmg = enemy->attack(*player);
@@ -217,9 +216,16 @@ void UI::battle(Monster* enemy,char* enemyName, int x, int y)
 	}
 }
 
-void UI::move(int x, int y) 
+void UI::move(int x, int y)
 {
+	if (x > 20 || y > 20||x<0||y<0)
+	{
+		cout << "You can't exit the map!!" << endl;
+		return;
+	}
+
 	Monster* enemy = nullptr;
+
 	switch (this->map[x][y])
 	{
 	case -1:
@@ -250,7 +256,7 @@ void UI::move(int x, int y)
 	case 3:
 		cout << "You attack the deathknight" << endl;
 		enemy = generateMonster(x, y);
-		map[x][y] = 200;//the deathknight is now counted as a generated deathknight
+		map[x][y] = 300;//the deathknight is now counted as a generated deathknight
 		battle(enemy, enemy->getName(), x, y);
 		break;
 	case 300:
@@ -304,10 +310,10 @@ char UI::readInput()
 
 void UI::printPlayerStats() 
 {
-	cout << "Name: " << player->getName() << " Class: " << playerClass;
+	cout << "Name: " << player->getName() << " Class: " << playerClass<<" Lvl: "<<player->getLevel();
 	player->printSpecial();
 	cout << "HP: " << player->getHp() << " Str: " << player->getStr() << " Int: " << player->getIntellect()<<endl;
-	//cout << "X: " << playerX << " Y: " << playerY << endl;
+	cout << "X: " << playerX << " Y: " << playerY << endl;
 }
 
 void UI::gameStart() 
